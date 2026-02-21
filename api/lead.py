@@ -32,9 +32,15 @@ ALLOWED_ORIGINS = [
     'https://www.longdrivemarketing.com',
     'https://longdrivepartners.com',
     'https://www.longdrivepartners.com',
-    'https://radish-wolf-y8bb.squarespace.com',  # LDS dev
-    'https://carrot-elk-xmaj.squarespace.com',   # LDM dev
 ]
+
+def is_allowed_origin(origin):
+    if origin in ALLOWED_ORIGINS:
+        return True
+    # Allow all Squarespace dev sites
+    if origin.endswith('.squarespace.com') and origin.startswith('https://'):
+        return True
+    return False
 
 def pipedrive(endpoint, body):
     url = f'{BASE}{endpoint}?api_token={API_TOKEN}'
@@ -50,7 +56,7 @@ def cors_headers(origin):
         'Access-Control-Allow-Headers': 'Content-Type',
         'Access-Control-Max-Age': '86400',
     }
-    if origin in ALLOWED_ORIGINS:
+    if is_allowed_origin(origin):
         h['Access-Control-Allow-Origin'] = origin
     return h
 
