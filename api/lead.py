@@ -32,6 +32,8 @@ ALLOWED_ORIGINS = [
     'https://www.longdrivemarketing.com',
     'https://longdrivepartners.com',
     'https://www.longdrivepartners.com',
+    'https://longdrivegroup.com',
+    'https://www.longdrivegroup.com',
 ]
 
 def is_allowed_origin(origin):
